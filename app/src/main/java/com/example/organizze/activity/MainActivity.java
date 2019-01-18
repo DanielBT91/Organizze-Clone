@@ -1,23 +1,24 @@
-package com.example.organizze;
+package com.example.organizze.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.organizze.Activity.CadastroActivity;
-import com.example.organizze.Activity.LoginActivity;
+import com.example.organizze.R;
+import com.example.organizze.config.ConfiguraFirebase;
+import com.google.firebase.auth.FirebaseAuth;
 import com.heinrichreimersoftware.materialintro.app.IntroActivity;
 import com.heinrichreimersoftware.materialintro.slide.FragmentSlide;
 
 public class MainActivity extends IntroActivity {
     private Button btnCadastro;
+    private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
-
 
 
         setButtonBackVisible(false);
@@ -56,6 +57,12 @@ public class MainActivity extends IntroActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        verificaUsuário();
+    }
+
     public void onClickCadastro(View view){
         startActivity(new Intent(this, CadastroActivity.class));
     }
@@ -64,4 +71,10 @@ public class MainActivity extends IntroActivity {
         startActivity(new Intent(this, LoginActivity.class));
     }
 
+    public void verificaUsuário(){
+        auth = ConfiguraFirebase.getFirebaseAuth();
+        if(auth.getCurrentUser() != null){
+            startActivity(new Intent(this, HomeActivity.class));
+        }
+    }
 }
