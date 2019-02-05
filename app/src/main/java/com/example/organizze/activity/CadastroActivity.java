@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.organizze.R;
 import com.example.organizze.config.ConfiguraFirebase;
+import com.example.organizze.helper.Base64Custom;
 import com.example.organizze.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,6 +24,7 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText campoNome, campoSenha,campoEmail;
     private Button btnCadastrar;
     private FirebaseAuth auth;
+    private  Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +48,13 @@ public class CadastroActivity extends AppCompatActivity {
                     if(!textoEmail.isEmpty()){
                         if(!textoSenha.isEmpty()){
 
-                            Usuario usuario = new Usuario();
+                           usuario = new Usuario();
 
                             usuario.setNome(textoNome);
                             usuario.setEmail(textoEmail);
                             usuario.setSenha(textoSenha);
 
-                            cadastrarUsuario(usuario.getEmail(), usuario.getSenha());
+                            cadastrarUsuario();
                         }else{
                             Toast.makeText(getApplicationContext(),
                                     "Preencha a senha",
@@ -76,18 +78,22 @@ public class CadastroActivity extends AppCompatActivity {
 
     }
 
-    public void cadastrarUsuario(String email, String senha){
+    public void cadastrarUsuario(){
         auth = ConfiguraFirebase.getFirebaseAuth();
 
-
-
         auth.createUserWithEmailAndPassword(
-            email,senha
+            usuario.getEmail(),usuario.getSenha()
         ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+
+                    String idUsuario = Base64Custom.encodeBase64(usuario.getEmail());
+                    usuario.setIdUsuario(idUsuario);
+
+                    usuario.salvar();
                     finish();
+
                 }else{
                     String exception = null;
                     try {

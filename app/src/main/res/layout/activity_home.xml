@@ -10,6 +10,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:elevation="0dp"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
@@ -29,29 +30,30 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="10dp"
-        fab:menu_icon="@drawable/ic_add_white_24dp"
-        app:menu_colorNormal="@color/colorAccent"
-        app:menu_colorPressed="@color/colorAccent"
-        >
+        app:menu_colorNormal="@color/colorPrimaryDark"
+        app:menu_colorPressed="@color/colorAccentReceita"
+        fab:menu_icon="@drawable/fab_add">
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_despesa"
-            android:onClick="adicionarDespesa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDarkDespesa"
-            android:src="@drawable/ic_add_white_24dp"
+            android:onClick="adicionarDespesa"
+            android:src="@drawable/fab_add"
+            app:backgroundTint="@color/colorPrimaryDarkDespesa"
             fab:fab_label="Despesa"
             fab:fab_size="mini"
             fab:menu_colorNormal="@color/colorPrimaryDespesa" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_receita"
-            android:onClick="adicionarReceita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryReceita"
-            android:src="@drawable/ic_add_white_24dp"
+            android:onClick="adicionarReceita"
+            android:src="@drawable/fab_add"
+            app:backgroundTint="@color/colorPrimaryReceita"
             fab:fab_label="Receita"
             fab:fab_size="mini"
             fab:menu_colorNormal="@color/colorPrimaryReceita" />

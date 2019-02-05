@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Organizze</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="msg_error">O campo %1$s não foi preenchido! </string>
+    <string name="sucesso_add">%1$s adicionada com sucesso!</string>
+
+
 </resources>

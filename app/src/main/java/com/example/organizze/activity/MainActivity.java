@@ -10,10 +10,13 @@ import com.example.organizze.config.ConfiguraFirebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.heinrichreimersoftware.materialintro.app.IntroActivity;
 import com.heinrichreimersoftware.materialintro.slide.FragmentSlide;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 public class MainActivity extends IntroActivity {
     private Button btnCadastro;
     private FirebaseAuth auth;
+    private MaterialCalendarView calendarViwe;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,7 @@ public class MainActivity extends IntroActivity {
 
     public void verificaUsuário(){
         auth = ConfiguraFirebase.getFirebaseAuth();
+//        auth.signOut();
         if(auth.getCurrentUser() != null){
             startActivity(new Intent(this, HomeActivity.class));
         }
